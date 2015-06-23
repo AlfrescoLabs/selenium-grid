@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/util 
+          http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+          
+    <context:annotation-config/>
+    <context:component-scan base-package="org.alfresco"/>
+    <context:spring-configured/>
+    
+    <util:constant id="englishLocale" static-field="java.util.Locale.ENGLISH" />
+    <util:constant id="language" static-field="org.alfresco.po.BrowserPreference.Language" />
+    <bean id="poProperties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:webdriver.properties</value>
+                <value>classpath:node.properties</value>
+                <value>classpath:hub.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="ignoreResourceNotFound" value="true" />
+    </bean>
+    <!--                        -->
+    <!-- Local Selenium Grid    -->
+    <!--                        -->
+    <bean id="grid" class="org.alfresco.grid.Grid">
+        <constructor-arg name="localGrid">
+            <value type="java.lang.Boolean">${webdriver.local.grid}</value>
+        </constructor-arg>
+    </bean>
+    <!--                   -->
+    <!-- WebDriver Factory -->
+    <!--                   -->
+    <bean id="webDriverFactoryBean" class="org.alfresco.grid.WebDriverFactory">
+        <property name="gridUrl" value="${webdriver.grid.url}" />
+        <property name="chromeServerPath" value="${webdriver.chrome.server.path}" />
+        <property name="ieServerPath" value="${webdriver.ie.server.path}" />
+        <property name="downloadDirectory" value="${webdriver.download.directory}"/>
+        <property name="mimeTypes" value="${webdriver.download.mime.types}" />
+    </bean>
+    <!--                  -->
+    <!-- WebDrivers       -->
+    <!--                  -->
+    <bean id="FireFox" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="FireFox"/>
+    </bean>
+    <bean id="Chrome" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="Chrome"/>
+    </bean>
+    <bean id="IE" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="IE"/>
+    </bean>
+    <bean id="HtmlUnit" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="HtmlUnit"/>
+    </bean>
+    <bean id="RemoteFireFox" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="RemoteFireFox"/>
+    </bean>
+    <bean id="RemoteChrome" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="RemoteChrome"/>
+    </bean>
+    <bean id="RemoteIE" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
+        <constructor-arg value="RemoteIE"/>
+    </bean>
+</beans>
