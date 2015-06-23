@@ -7,8 +7,8 @@ Git:
 
 ### Use Maven
 Import the project
-'''<dependency>
+```dependency>
     <groupId>org.alfresco</groupId>
     <artifactId>selenium-grid</artifactId>
     <version>1.0</version>
-</dependency>'''
+</dependency>```
