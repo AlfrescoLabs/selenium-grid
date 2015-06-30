@@ -4,6 +4,24 @@
     <artifactId>selenium-grid</artifactId>
     <version>1.0-SNAPSHOT</version>
     <groupId>org.alfresco</groupId>
+    <organization>
+        <name>Alfresco Software</name>
+        <url>http://www.alfresco.com/</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>Michael Suzuki</name>
+            <roles>
+                <role>Lead Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -11,6 +29,12 @@
         <selenium.version>2.45.0-alfresco</selenium.version>
         <spring.version>4.1.6.RELEASE</spring.version>
     </properties>
+    <scm>
+        <connection>scm:git:https://github.com/AlfrescoTestAutomation/selenium-grid.git</connection>
+        <url>https://github.com/AlfrescoTestAutomation/selenium-grid</url>
+        <developerConnection>scm:git:https://github.com/AlfrescoTestAutomation/selenium-grid.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
     <repositories>
         <repository>
             <id>alfresco-public-snapshots</id>
@@ -66,4 +90,32 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>alfresco-internal</id>
+            <name>Alfresco Releases Repository</name>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>alfresco-internal-snapshots</id>
+            <name>Alfresco Snapshots Repository </name>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                   <tagNameFormat>${project.artifactId}-${project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
