@@ -193,7 +193,7 @@ public class WebDriverFactory implements FactoryBean<WebDriver>
     }
     
     /**
-     * Creates a new instance of an {@link WebDroneRemoteWebDriver}
+     * Creates a new instance of an {@link WebDriver}
      * @return {@link DesiredCapabilities} type of browser capability
      * @throws UnsupportedOperationException if grid url is invalid
      */
