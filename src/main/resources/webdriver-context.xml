@@ -9,14 +9,10 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util.xsd">
-          
-    <context:annotation-config/>
-    <context:component-scan base-package="org.alfresco"/>
-    <context:spring-configured/>
     
     <util:constant id="englishLocale" static-field="java.util.Locale.ENGLISH" />
     <util:constant id="language" static-field="org.alfresco.po.BrowserPreference.Language" />
-    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    <bean id="webdriverProperties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:webdriver.properties</value>
