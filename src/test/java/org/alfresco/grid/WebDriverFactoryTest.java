@@ -55,14 +55,6 @@ public class WebDriverFactoryTest extends AbstractTestNGSpringContextTests
         Assert.assertNotNull(driver2);
     }
     @Test
-    public void getChrome()
-    {
-        driver = factory.getObject(Browser.Chrome);
-        Assert.assertNotNull(driver);
-        driver2 = (WebDriver) ctx.getBean("Chrome");
-        Assert.assertNotNull(driver2);
-    }
-    @Test
     public void getHtmlUnit()
     {
         driver = factory.getObject(Browser.HtmlUnit);

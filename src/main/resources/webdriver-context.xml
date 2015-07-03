@@ -17,7 +17,7 @@
     
     <util:constant id="englishLocale" static-field="java.util.Locale.ENGLISH" />
     <util:constant id="language" static-field="org.alfresco.po.BrowserPreference.Language" />
-    <bean id="poProperties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+    <bean id="driverProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:webdriver.properties</value>
@@ -25,16 +25,19 @@
                 <value>classpath:hub.properties</value>
             </list>
         </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="ignoreResourceNotFound" value="true" />
+    </bean>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="properties" ref="driverProperties" />
     </bean>
     <!--                        -->
     <!-- Local Selenium Grid    -->
     <!--                        -->
     <bean id="grid" class="org.alfresco.grid.Grid">
-        <constructor-arg name="localGrid">
-            <value type="java.lang.Boolean">${webdriver.local.grid}</value>
-        </constructor-arg>
+        <constructor-arg name="localGrid" ref="localGrid" />
+    </bean>
+    <bean id="localGrid" class="java.lang.Boolean">
+        <constructor-arg value="${webdriver.local.grid}"/>
     </bean>
     <!--                   -->
     <!-- WebDriver Factory -->
