@@ -44,10 +44,10 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.springframework.beans.factory.FactoryBean;
 /**
  * A WebDrone factory that implements spring base bean factory.
- * The factory creates new instances of {@link WebDrone} 
+ * The factory creates new instances of {@link WebDriver} 
  * based on the browser type that determines which {@link WebDriver} 
  * implementation to use.
- * <p>This factory is able to create instances of the {@link WebDriver} and {@link WebDrone}
+ * <p>This factory is able to create instances of the {@link WebDriver}
  * however it is unable to destroy the beans and is up to deveopler to ensure that instance of
  * WebDrone are destroyed once finished.</p>
  * 
@@ -317,9 +317,12 @@ public class WebDriverFactory implements FactoryBean<WebDriver>
     {
         this.mimeTypes = mimeTypes;
     }
+    /**
+     * Get default remote fire fox driver.
+     */
     public WebDriver getObject() throws Exception
     {
-        return null;
+        return getObject(Browser.RemoteFireFox);
     }
     public Class<?> getObjectType()
     {
