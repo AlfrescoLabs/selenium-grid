@@ -44,31 +44,24 @@ public class WebDriverFactoryTest extends AbstractTestNGSpringContextTests
     void close()
     {
         driver.quit();
-        driver2.quit();
     }
     @Test
     public void getFireFox()
     {
         driver = factory.getObject(Browser.FireFox);
         Assert.assertNotNull(driver);
-        driver2 = (WebDriver) ctx.getBean("FireFox");
-        Assert.assertNotNull(driver2);
     }
     @Test
     public void getHtmlUnit()
     {
         driver = factory.getObject(Browser.HtmlUnit);
         Assert.assertNotNull(driver);
-        driver2 = (WebDriver) ctx.getBean("HtmlUnit");
-        Assert.assertNotNull(driver2);
     }
     @Test
     public void getRemoteFireFox()
     {
         driver = factory.getObject(Browser.RemoteFireFox);
         Assert.assertNotNull(driver);
-        driver2 = (WebDriver) ctx.getBean("RemoteFireFox");
-        Assert.assertNotNull(driver2);
     }
     @Test
     public void getGrid()
