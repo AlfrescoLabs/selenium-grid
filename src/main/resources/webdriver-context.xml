@@ -40,28 +40,5 @@
         <property name="downloadDirectory" value="${webdriver.download.directory}"/>
         <property name="mimeTypes" value="${webdriver.download.mime.types}" />
     </bean>
-    <!--                  -->
-    <!-- WebDrivers       -->
-    <!--                  -->
-    <bean id="FireFox" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="FireFox"/>
-    </bean>
-    <bean id="Chrome" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="Chrome"/>
-    </bean>
-    <bean id="IE" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="IE"/>
-    </bean>
-    <bean id="HtmlUnit" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="HtmlUnit"/>
-    </bean>
-    <bean id="RemoteFireFox" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="RemoteFireFox"/>
-    </bean>
-    <bean id="RemoteChrome" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="RemoteChrome"/>
-    </bean>
-    <bean id="RemoteIE" factory-bean="&amp;webDriverFactoryBean" factory-method="getObject"  destroy-method="quit" lazy-init="true" scope="prototype">
-        <constructor-arg value="RemoteIE"/>
-    </bean>
+
 </beans>
