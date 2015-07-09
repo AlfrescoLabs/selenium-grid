@@ -12,15 +12,10 @@
     
     <util:constant id="englishLocale" static-field="java.util.Locale.ENGLISH" />
     <util:constant id="language" static-field="org.alfresco.po.BrowserPreference.Language" />
-    <bean id="webdriverProperties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:webdriver.properties</value>
-                <value>classpath:grid/node.properties</value>
-                <value>classpath:grid/hub.properties</value>
-            </list>
-        </property>
-    </bean>
+    <context:property-placeholder location="classpath:webdriver.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:grid/node.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:grid/hub.properties" ignore-unresolvable="true" />
+
     <!--                        -->
     <!-- Local Selenium Grid    -->
     <!--                        -->

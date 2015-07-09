@@ -67,7 +67,6 @@ public class WebDriverFactory implements FactoryBean<WebDriver>
     private String downloadDirectory;
     private String mimeTypes;
     private Map<BrowserPreference, Object> preferences;
-    
     public WebDriver getObject(Browser browser)
     {
         switch (browser)
