@@ -42,6 +42,7 @@ import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 /**
  * A WebDrone factory that implements spring base bean factory.
  * The factory creates new instances of {@link WebDriver} 
@@ -66,6 +67,8 @@ public class WebDriverFactory implements FactoryBean<WebDriver>
     private String ieServerPath;
     private String downloadDirectory;
     private String mimeTypes;
+    @Value("${webdriver.language}") String language;
+    @Value("${webdriver.locale}") String locale;
     private Map<BrowserPreference, Object> preferences;
     public WebDriver getObject(Browser browser)
     {
@@ -131,6 +134,8 @@ public class WebDriverFactory implements FactoryBean<WebDriver>
         firefoxProfile.setPreference("dom.mms.retrievalRetryIntervals;", "60000,120000");
         //Set it to not store session history, reduced memory foot print.
         firefoxProfile.setPreference("browser.sessionhistory.max_total_viewers;","0");
+        firefoxProfile.setPreference("intl.accept_languages", language);
+        firefoxProfile.setPreference("general.useragent.locale", locale);
         return firefoxProfile;
     }
     /**
