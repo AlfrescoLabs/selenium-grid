@@ -58,14 +58,14 @@ public class WebDriverFactoryTest extends AbstractTestNGSpringContextTests
         Assert.assertNotNull(driver);
     }
     @Test
+    public void getGrid()
+    {
+        Assert.assertNotNull(factory.getGridUrl());
+    }
+    @Test
     public void getRemoteFireFox()
     {
         driver = factory.getObject(Browser.RemoteFireFox);
         Assert.assertNotNull(driver);
-    }
-    @Test
-    public void getGrid()
-    {
-        Assert.assertNotNull(factory.getGridUrl());
     }
 }

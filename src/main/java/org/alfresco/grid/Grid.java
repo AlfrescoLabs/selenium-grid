@@ -64,8 +64,8 @@ public class Grid
             node = new GridNode();
             if(!isAlive())
             {
-                node.start();
                 grid.run();
+                node.start();
             }
         }
     }
