@@ -46,8 +46,8 @@ public class Grid
     public static int RESPONSE_STATUS_404 = 404;
     public static int RESPONSE_STATUS_200 = 200;
     private Log logger = LogFactory.getLog(Grid.class);
-    private final GridHub grid;
-    private final GridNode node;
+    private GridHub grid;
+    private GridNode node;
     private final boolean isGridLocal;
     
     /**
@@ -58,12 +58,15 @@ public class Grid
     public Grid(final boolean localGrid)
     {
         this.isGridLocal = localGrid;
-        grid = new GridHub();
-        node = new GridNode();
-        if(localGrid && !isAlive())
+        if(localGrid)
         {
-            grid.run();
-            node.start();
+            grid = new GridHub();
+            node = new GridNode();
+            if(!isAlive())
+            {
+                node.start();
+                grid.run();
+            }
         }
     }
     
