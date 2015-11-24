@@ -11,6 +11,6 @@ Import the project
 <dependency>
     <groupId>org.alfresco</groupId>
     <artifactId>selenium-grid</artifactId>
-    <version>1.5</version>
+    <version>1.7</version>
 </dependency>
 ```
