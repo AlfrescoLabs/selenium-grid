@@ -24,6 +24,8 @@ import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.grid.common.RegistrationRequest;
 import org.openqa.grid.internal.utils.SelfRegisteringRemote;
+import org.openqa.grid.shared.GridNodeServer;
+import org.openqa.selenium.server.SeleniumServer;
 
 /**
  * Builds a {@link RegistrationRequest} for {@link SelfRegisteringRemote} server,
@@ -38,6 +40,8 @@ public class GridNode
     private final Logger logger = Logger.getLogger(GridNode.class.getName());
 
     private final SelfRegisteringRemote remote;
+    private final GridNodeServer server;
+    private final RegistrationRequest registrationRequest;
 
     /**
      * Constructor with optional array of ports to set.
@@ -47,18 +51,26 @@ public class GridNode
      */
     public GridNode(int ...port)
     {
-        String[] nodeProperties = GridProperties.getNodeProperties(port);
-        RegistrationRequest registrationRequest = RegistrationRequest.build(nodeProperties);
-        if(port.length > 0)
+        try
         {
-            String nodePort = String.valueOf(port[1]);
-            if(StringUtils.isNotEmpty(nodePort))
+            String[] nodeProperties = GridProperties.getNodeProperties(port);
+            registrationRequest = RegistrationRequest.build(nodeProperties);
+            if(port.length > 0)
             {
-                Map<String, Object> config = registrationRequest.getConfiguration();
-                config.put("port", nodePort);
+                String nodePort = String.valueOf(port[1]);
+                if(StringUtils.isNotEmpty(nodePort))
+                {
+                    Map<String, Object> config = registrationRequest.getConfiguration();
+                    config.put("port", nodePort);
+                }
             }
+            remote = new SelfRegisteringRemote(registrationRequest);
+            server = new SeleniumServer(registrationRequest.getConfiguration());
+        } 
+        catch (Exception e)
+        {
+            throw new RuntimeException("Unable to start selenium node",e);
         }
-        remote = new SelfRegisteringRemote(registrationRequest);
     }
 
     /**
@@ -69,6 +81,7 @@ public class GridNode
         try
         {
             logger.info("Starting the grid node.");
+            remote.setRemoteServer(server);
             remote.startRemoteServer();
             remote.startRegistrationProcess();
         }
@@ -84,6 +97,6 @@ public class GridNode
     public void stop()
     {
         logger.info("Stopping the grid node.");
-        remote.stopRemoteServer();
+        server.stop();
     }
 }
